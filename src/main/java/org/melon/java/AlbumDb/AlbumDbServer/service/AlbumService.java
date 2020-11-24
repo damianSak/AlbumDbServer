@@ -40,6 +40,10 @@ public class AlbumService {
         return albumRepository.findByReleaseYear(releaseYear);
     }
 
+    public List<Album> findByGenre(String genre) {
+        return albumRepository.findByGenre(genre);
+    }
+
     public Album save(Album album) {
         return albumRepository.save(album);
     }
@@ -76,11 +80,11 @@ public class AlbumService {
 
         }
         Album albumToUpdate = albumRepository.findById(id).orElseThrow();
-        albumToUpdate.setId(album.getId());
+        albumToUpdate.setTitle(album.getTitle());
         albumToUpdate.setBand(album.getBand());
         albumToUpdate.setGenre(album.getGenre());
         albumToUpdate.setReleaseYear(album.getReleaseYear());
-        return save(album);
+        return save(albumToUpdate);
     }
 
     public void updateBand(String band, int id) {

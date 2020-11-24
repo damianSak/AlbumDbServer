@@ -43,6 +43,10 @@ public class AlbumController {
     public List<Album> findByReleaseYear(@PathVariable int releaseYear) {
         return albumService.findByReleaseYear(releaseYear);
     }
+    @GetMapping("/find/genre/{genre}")
+    public List<Album> findByGenre(@PathVariable String genre) {
+        return albumService.findByGenre(genre);
+    }
 
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
