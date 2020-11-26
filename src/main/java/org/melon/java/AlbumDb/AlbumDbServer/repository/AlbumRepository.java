@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface AlbumRepository extends CrudRepository<Album, Integer> {
@@ -19,6 +20,8 @@ public interface AlbumRepository extends CrudRepository<Album, Integer> {
     List<Album> findByReleaseYear(int releaseYear);
 
     List<Album> findByGenre(String Genre);
+
+    Optional<Album> findByTitleAndBand(String title,String band);
 
     @Transactional
     @Modifying

@@ -4,9 +4,11 @@ import org.melon.java.AlbumDb.AlbumDbServer.model.Album;
 import org.melon.java.AlbumDb.AlbumDbServer.service.AlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/database")
@@ -50,8 +52,12 @@ public class AlbumController {
 
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public Album addAlbum(@RequestBody Album album) {
-        return albumService.addAlbum(album);
+    public ResponseEntity addAlbum(@RequestBody Album album) {
+        Optional<Album> albumFromDb = albumService.findByTitleAndBand(album.getTitle(),album.getBand());
+        if(albumFromDb.isPresent()) {
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
+        }
+        return ResponseEntity.ok(albumService.addAlbum(album)) ;
     }
 
     @DeleteMapping("/delete_by_id/{id}")

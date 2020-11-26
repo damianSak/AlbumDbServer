@@ -43,6 +43,10 @@ public class AlbumService {
     public List<Album> findByGenre(String genre) {
         return albumRepository.findByGenre(genre);
     }
+    public Optional<Album> findByTitleAndBand(String title, String band){
+        Optional<Album> albumFromDb = albumRepository.findByTitleAndBand(title,band);
+        return albumFromDb;
+    }
 
     public Album save(Album album) {
         return albumRepository.save(album);
