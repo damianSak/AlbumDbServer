@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,9 +53,10 @@ public class AlbumController {
 
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity addAlbum(@RequestBody Album album) {
+    public ResponseEntity addAlbum(@Valid @RequestBody Album album) {
         Optional<Album> albumFromDb = albumService.findByTitleAndBand(album.getTitle(),album.getBand());
         if(albumFromDb.isPresent()) {
+
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
         }
         return ResponseEntity.ok(albumService.addAlbum(album)) ;
