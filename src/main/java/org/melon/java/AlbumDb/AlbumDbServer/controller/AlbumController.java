@@ -1,5 +1,7 @@
 package org.melon.java.AlbumDb.AlbumDbServer.controller;
 
+import org.melon.java.AlbumDb.AlbumDbServer.controller.exceptions.AlbumAlreadyInDatabaseException;
+import org.melon.java.AlbumDb.AlbumDbServer.controller.model.AlbumDbResponse;
 import org.melon.java.AlbumDb.AlbumDbServer.model.Album;
 import org.melon.java.AlbumDb.AlbumDbServer.service.AlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,25 +47,34 @@ public class AlbumController {
     public List<Album> findByReleaseYear(@PathVariable int releaseYear) {
         return albumService.findByReleaseYear(releaseYear);
     }
+
     @GetMapping("/find/genre/{genre}")
     public List<Album> findByGenre(@PathVariable String genre) {
         return albumService.findByGenre(genre);
     }
 
     @PostMapping("/add")
-    @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity addAlbum(@Valid @RequestBody Album album) {
-        Optional<Album> albumFromDb = albumService.findByTitleAndBand(album.getTitle(),album.getBand());
-        if(albumFromDb.isPresent()) {
+    public AlbumDbResponse addAlbum(@RequestBody Album album) {
+        Optional<Album> albumFromDb = albumService.findByTitleAndBand(album.getTitle(), album.getBand());
+        if (albumFromDb.isPresent()) {
+            throw  new AlbumAlreadyInDatabaseException("Podany albym znajduje sie już w bazie");
+        } else {
 
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
+            return AlbumDbResponse.ok("Dodano album","szakalaka");
+
         }
-        return ResponseEntity.ok(albumService.addAlbum(album)) ;
+
     }
 
     @DeleteMapping("/delete_by_id/{id}")
     public void deleteById(@PathVariable int id) {
-        albumService.deleteById(id);
+        Optional<Album> albumFromDb = Optional.ofNullable(albumService.findById(id));
+        if (albumFromDb.isPresent()) {
+
+            albumService.deleteById(id);
+        } else {
+            ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).build();
+        }
     }
 
     @DeleteMapping("/delete_by_title/{title}")

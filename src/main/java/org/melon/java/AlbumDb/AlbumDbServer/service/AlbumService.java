@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Scanner;
 
 @Service
 public class AlbumService {
@@ -64,16 +63,11 @@ public class AlbumService {
         List<Album> albumsToDelete = findByTitle(title);
         if (albumsToDelete.size() == 1) {
             Album albumToDelete = albumsToDelete.get(0);
-            albumRepository.deleteById(albumToDelete.getId());
+            deleteById(albumToDelete.getId());
         } else if (albumsToDelete.size() >= 2) {
             for (Album album : albumsToDelete) {
-                findById(album.getId());
+               deleteById(album.getId());
             }
-            Scanner scan = new Scanner(System.in);
-            System.out.print("Choose a Id of album to be delete:");
-            int id = scan.nextInt();
-            deleteById(id);
-
         } else{
 
         }

@@ -24,3 +24,13 @@ spring:
     url: jdbc:mysql://localhost:3306/musicdb?useLegacyDatetimeCode=false&serverTimezone=Europe/London
     username: root
     password: password123
+
+  albumdbserver:
+    api:
+      version: 1.0
+    sendreport:
+      uri: https://dummypage.sendreport.com
+    errors:
+      controlleradvice: true
+      attributes: true
+      controller: true

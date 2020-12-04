@@ -11,8 +11,10 @@ public class Album {
     @Column (name= "bandId")
     private int id;
 
+
     @Column(name = "bandName", nullable = false)
     private String band;
+
 
     @Column(name = "albumTitle", nullable = false)
     private String title;
@@ -35,8 +37,9 @@ public class Album {
         return band;
     }
 
-    public void setBand(String band) {
+    public Album setBand(String band) {
         this.band = band;
+        return this;
     }
 
     public String getTitle() {
