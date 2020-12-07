@@ -1,26 +1,46 @@
 package org.melon.java.AlbumDb.AlbumDbServer.controller.model;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.melon.java.AlbumDb.AlbumDbServer.model.Album;
 
-public class AlbumDbResponse extends ResponseEntity<String> {
+import java.util.List;
+
+public class AlbumDbResponse {
 
     private String message;
+    private Album album;
+    private List<Album> albumList;
 
-    private AlbumDbResponse(String string, String message, HttpStatus status) {
-        super(string, status);
+    private AlbumDbResponse(Album album , String message) {
+        this.message = message;
+        this.album = album;
+    }
+
+    private AlbumDbResponse(String message) {
         this.message = message;
     }
 
-    public static AlbumDbResponse ok(String string,String message) {
-        return new AlbumDbResponse(string, null, HttpStatus.OK);
+    private AlbumDbResponse (List<Album> albumList,String message) {
+        this.message = message;
+        this.albumList = albumList;
     }
 
-    public static AlbumDbResponse fail(String response, String message) {
-        return new AlbumDbResponse(response, message, HttpStatus.CONFLICT);
+    public static AlbumDbResponse of(Album album, String message) {
+        return new AlbumDbResponse(album, message);
+    }
+
+    public static AlbumDbResponse of(String message){
+        return new AlbumDbResponse( message);
+    }
+
+    public static AlbumDbResponse of(List<Album> albumList, String message){
+        return new AlbumDbResponse(albumList, message);
     }
 
     public String getMessage() {
         return message;
+    }
+
+    public Album getAlbum() {
+        return album;
     }
 }
