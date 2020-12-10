@@ -5,6 +5,7 @@ import org.melon.java.AlbumDb.AlbumDbServer.repository.AlbumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,6 +28,16 @@ public class AlbumService {
         return result.orElse(null);
     }
 
+    public List<Album> listFindById(int id) {
+        List<Album> result = new ArrayList<>();
+        Album album = findById(id);
+        result.add(album);
+        if(album ==null){
+            result.clear();
+        }
+        return result;
+    }
+
     public List<Album> findByBand(String band) {
         return albumRepository.findByBand(band);
     }
@@ -42,8 +53,9 @@ public class AlbumService {
     public List<Album> findByGenre(String genre) {
         return albumRepository.findByGenre(genre);
     }
-    public Optional<Album> findByTitleAndBand(String title, String band){
-        Optional<Album> albumFromDb = albumRepository.findByTitleAndBand(title,band);
+
+    public Optional<Album> findByTitleAndBand(String title, String band) {
+        Optional<Album> albumFromDb = albumRepository.findByTitleAndBand(title, band);
         return albumFromDb;
     }
 
@@ -55,22 +67,10 @@ public class AlbumService {
         return save(album);
     }
 
-    public void deleteById(int id) {
+    public Album delete(int id) {
+        Album album = findById(id);
         albumRepository.deleteById(id);
-    }
-
-    public void deleteByTitle(String title) {
-        List<Album> albumsToDelete = findByTitle(title);
-        if (albumsToDelete.size() == 1) {
-            Album albumToDelete = albumsToDelete.get(0);
-            deleteById(albumToDelete.getId());
-        } else if (albumsToDelete.size() >= 2) {
-            for (Album album : albumsToDelete) {
-               deleteById(album.getId());
-            }
-        } else{
-
-        }
+        return album;
     }
 
     public Album updateWholeRecord(Album album, int id) {
@@ -85,15 +85,43 @@ public class AlbumService {
         return save(albumToUpdate);
     }
 
+    //    public void updateBand(String band, int id) {
+//        albumRepository.updateBand(band, id);
+//    }
+//
+//    public void updateTitle(String title, int id) {
+//        albumRepository.updateTitle(title, id);
+//    }
+//
+//    public void updateGenre(String genre, int id) {
+//        albumRepository.updateGenre(genre, id);
+//    }
+//
+//    public void updateReleaseYeare(int releaseYeare, int id) {
+//        albumRepository.updateReleaseYeare(releaseYeare, id);
+//    }
     public void updateBand(String band, int id) {
-        albumRepository.updateBand(band, id);
+        Album albumToUpdate = findById(id);
+        albumToUpdate.setBand(band);
+        save(albumToUpdate);
     }
 
     public void updateTitle(String title, int id) {
-        albumRepository.updateTitle(title, id);
+        Album albumToUpdate = findById(id);
+        albumToUpdate.setTitle(title);
+        save(albumToUpdate);
+    }
+
+    public void updateGenre(String genre, int id) {
+        Album albumToUpdate = findById(id);
+        albumToUpdate.setGenre(genre);
+        save(albumToUpdate);
     }
 
     public void updateReleaseYeare(int releaseYeare, int id) {
-        albumRepository.updateReleaseYeare(releaseYeare, id);
+        Album albumToUpdate = findById(id);
+        albumToUpdate.setReleaseYear(releaseYeare);
+        save(albumToUpdate);
     }
+
 }

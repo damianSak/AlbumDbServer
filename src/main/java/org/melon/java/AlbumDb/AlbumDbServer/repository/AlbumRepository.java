@@ -13,6 +13,7 @@ import java.util.Optional;
 @Repository
 public interface AlbumRepository extends CrudRepository<Album, Integer> {
 
+
     List<Album> findByBand(String band);
 
     List<Album> findByTitle(String title);
@@ -35,6 +36,12 @@ public interface AlbumRepository extends CrudRepository<Album, Integer> {
 
     @Transactional
     @Modifying
+    @Query("update Album a set a.genre = ?1 where a.id = ?2" )
+    void updateGenre( String genre, int id);
+
+    @Transactional
+    @Modifying
     @Query("update Album a set a.releaseYear = ?1 where a.id = ?2" )
     void updateReleaseYeare( int releaseYear, int id);
+
 }

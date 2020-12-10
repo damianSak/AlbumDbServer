@@ -1,7 +1,7 @@
 server:
   port: ${port:8080}
   servlet:
-    context-path: /server
+    context-path: /albumsdb
 
 spring:
   application:
@@ -25,12 +25,4 @@ spring:
     username: root
     password: password123
 
-  albumdbserver:
-    api:
-      version: 1.0
-    sendreport:
-      uri: https://dummypage.sendreport.com
-    errors:
-      controlleradvice: true
-      attributes: true
-      controller: true
+
