@@ -93,51 +93,19 @@ public class AlbumController {
         }
     }
 
-    @PutMapping("/update_band/{id}")
-    public ResponseEntity<AlbumDbResponse> updateBand(@RequestBody Album album, @PathVariable int id) {
-        Optional<Album> albumFromDb = Optional.ofNullable(albumService.findById(id));
-        if (albumFromDb.isPresent()) {
-            albumService.updateBand(album.getBand(), id);
-            return ResponseEntity.ok(AlbumDbResponse.of("Zaktualizowano nazwę zespołu w albumie o ID =:" + id));
-        } else {
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(AlbumDbResponse.of("Nie znaleziono albumu o podanym ID = " + id));
-        }
+//    @PutMapping("/update_band/{id}")
+//    public ResponseEntity<AlbumDbResponse> updateBand(@RequestBody Album album, @PathVariable int id) {
+//        Optional<Album> albumFromDb = Optional.ofNullable(albumService.findById(id));
+//        if (albumFromDb.isPresent()) {
+//            albumService.updateBand(album.getBand(), id);
+//            return ResponseEntity.ok(AlbumDbResponse.of("Zaktualizowano nazwę zespołu w albumie o ID =:" + id));
+//        } else {
+//            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(AlbumDbResponse.of("Nie znaleziono albumu o podanym ID = " + id));
+//        }
+//
+//    }
 
-    }
 
-    @PutMapping("/update_title/{id}")
-    public ResponseEntity<AlbumDbResponse> updateTitle(@RequestBody Album album, @PathVariable int id) {
-        Optional<Album> albumFromDb = Optional.ofNullable(albumService.findById(id));
-        if (albumFromDb.isPresent()) {
-            albumService.updateTitle(album.getTitle(), id);
-            return ResponseEntity.ok(AlbumDbResponse.of("Zaktualizowano nazwę zespołu w albumie o ID = " + id));
-        } else {
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(AlbumDbResponse.of("Nie znaleziono albumu o podanym ID = " + id));
-        }
-    }
-
-    @PutMapping("/update_genre/{id}")
-    public ResponseEntity<AlbumDbResponse> updateGenre(@RequestBody Album album, @PathVariable int id) {
-        Optional<Album> albumFromDb = Optional.ofNullable(albumService.findById(id));
-        if (albumFromDb.isPresent()) {
-            albumService.updateGenre(album.getGenre(), id);
-            return ResponseEntity.ok(AlbumDbResponse.of("Zaktualizowano gatunek muzyki w albumie o ID = " + id));
-        } else {
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(AlbumDbResponse.of("Nie znaleziono albumu o podanym ID = " + id));
-        }
-    }
-
-    @PutMapping("/update_year/{id}")
-    public ResponseEntity<AlbumDbResponse> updateReleaseYeare(@RequestBody Album album, @PathVariable int id) {
-        Optional<Album> albumFromDb = Optional.ofNullable(albumService.findById(id));
-        if (albumFromDb.isPresent()) {
-            albumService.updateReleaseYeare(album.getReleaseYear(), id);
-            return ResponseEntity.ok(AlbumDbResponse.of("Zaktualizowano rok wydania w albumie o ID = " + id));
-
-        } else {
-            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(AlbumDbResponse.of("Nie znaleziono albumu o podanym ID = " + id));
-        }
-    }
 
 
 }

@@ -85,43 +85,11 @@ public class AlbumService {
         return save(albumToUpdate);
     }
 
-    //    public void updateBand(String band, int id) {
-//        albumRepository.updateBand(band, id);
+//    public void updateBand(String band, int id) {
+//        Album albumToUpdate = findById(id);
+//        albumToUpdate.setBand(band);
+//        save(albumToUpdate);
 //    }
-//
-//    public void updateTitle(String title, int id) {
-//        albumRepository.updateTitle(title, id);
-//    }
-//
-//    public void updateGenre(String genre, int id) {
-//        albumRepository.updateGenre(genre, id);
-//    }
-//
-//    public void updateReleaseYeare(int releaseYeare, int id) {
-//        albumRepository.updateReleaseYeare(releaseYeare, id);
-//    }
-    public void updateBand(String band, int id) {
-        Album albumToUpdate = findById(id);
-        albumToUpdate.setBand(band);
-        save(albumToUpdate);
-    }
 
-    public void updateTitle(String title, int id) {
-        Album albumToUpdate = findById(id);
-        albumToUpdate.setTitle(title);
-        save(albumToUpdate);
-    }
-
-    public void updateGenre(String genre, int id) {
-        Album albumToUpdate = findById(id);
-        albumToUpdate.setGenre(genre);
-        save(albumToUpdate);
-    }
-
-    public void updateReleaseYeare(int releaseYeare, int id) {
-        Album albumToUpdate = findById(id);
-        albumToUpdate.setReleaseYear(releaseYeare);
-        save(albumToUpdate);
-    }
 
 }
