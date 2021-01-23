@@ -23,6 +23,18 @@ public class Album {
     @Column(name = "yearOfRelease", nullable = false)
     private int releaseYear;
 
+    private Album(int id, String band, String title, String genre, int releaseYear) {
+        this.id = id;
+        this.band = band;
+        this.title = title;
+        this.genre = genre;
+        this.releaseYear = releaseYear;
+    }
+
+    public static AlbumBuilder builder() {
+        return new AlbumBuilder();
+    }
+
     public int getId() {
         return id;
     }
@@ -61,5 +73,45 @@ public class Album {
 
     public void setReleaseYear(int releaseYear) {
         this.releaseYear = releaseYear;
+    }
+
+    public static final class AlbumBuilder {
+        private int id;
+        private String band;
+        private String title;
+        private String genre;
+        private int releaseYear;
+
+        private AlbumBuilder() {
+        }
+
+        public AlbumBuilder id(int id) {
+            this.id = id;
+            return this;
+        }
+
+        public AlbumBuilder band(String band) {
+            this.band = band;
+            return this;
+        }
+
+        public AlbumBuilder title(String title) {
+            this.title = title;
+            return this;
+        }
+
+        public AlbumBuilder genre(String genre) {
+            this.genre = genre;
+            return this;
+        }
+
+        public AlbumBuilder releaseYear(int releaseYear) {
+            this.releaseYear = releaseYear;
+            return this;
+        }
+
+        public Album build() {
+            return new Album(id, band, title, genre, releaseYear);
+        }
     }
 }
