@@ -74,10 +74,9 @@ public class AlbumService {
     }
 
     public Album updateWholeRecord(Album album, int id) {
-        if (album.getId() != id) {
 
-        }
-        Album albumToUpdate = albumRepository.findById(id).orElseThrow();
+//        Album albumToUpdate = albumRepository.findById(id).orElseThrow();
+        Album albumToUpdate = listFindById(id).get(0);
         albumToUpdate.setTitle(album.getTitle());
         albumToUpdate.setBand(album.getBand());
         albumToUpdate.setGenre(album.getGenre());
