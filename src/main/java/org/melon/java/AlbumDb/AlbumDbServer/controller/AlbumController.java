@@ -32,8 +32,8 @@ public class AlbumController {
 
     @GetMapping("/find/id/{id}")
     public ResponseEntity<AlbumsListResponse> findById(@PathVariable int id) {
-        return ResponseEntity.ok(AlbumsListResponse.of( albumService.listFindById(id), "Znaleziono następujący album:"));
-
+        return ResponseEntity.ok(AlbumsListResponse.of( albumService.listFindById(id),
+                "Znaleziono następujący album:"));
     }
 
     @GetMapping("/find/band/{band}")
