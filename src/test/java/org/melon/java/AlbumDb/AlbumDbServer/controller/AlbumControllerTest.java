@@ -70,6 +70,7 @@ class AlbumControllerTest {
         List<Album> testList = Arrays.asList(testAlbum);
 
         when(albumServiceMock.listFindById(1)).thenReturn(testList);
+
         //when
         ResponseEntity<AlbumsListResponse> result = testObject.findById(1);
 
@@ -326,11 +327,9 @@ class AlbumControllerTest {
     @Test
     void updateWholeRecord_shouldNot_updateAlbumFromDB_when_wrongIdIsGiven() {
         //given
-
         Album newAlbum = Album.builder().band("Anathema").title("Judgement").id(2).build();
 
         when(albumServiceMock.findById(3)).thenReturn(isNull());
-
 
         //when
         ResponseEntity<AlbumDbResponse> response = testObject.updateWholeRecord(newAlbum,3);
