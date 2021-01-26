@@ -55,7 +55,6 @@ class AlbumServiceTest {
 
         // then
         assertThat(result).hasSize(0);
-
     }
 
     @Test
@@ -83,7 +82,6 @@ class AlbumServiceTest {
 
         // then
         assertThat(result).isEqualTo(null);
-
     }
 
     @Test
@@ -102,7 +100,6 @@ class AlbumServiceTest {
         assertThat(result).hasSize(1);
         assertThat(result.get(0).getBand()).isEqualTo(album1.getBand());
         assertThat(result.get(0).getId()).isEqualTo(1);
-
     }
 
     @Test
@@ -119,7 +116,6 @@ class AlbumServiceTest {
 
         // then
         assertThat(result).hasSize(0);
-
     }
 
     @Test
@@ -139,7 +135,6 @@ class AlbumServiceTest {
         assertThat(result).hasSize(3);
         assertThat(result.get(0).getTitle()).isEqualTo("Untouchables");
         assertThat(result.get(2).getId()).isEqualTo(3);
-
     }
 
     @Test
@@ -176,7 +171,6 @@ class AlbumServiceTest {
         assertThat(result).hasSize(2);
         assertThat(result.get(0).getGenre()).isEqualTo("Nu metal");
         assertThat(result.get(1).getBand()).isEqualTo("Moonspell");
-
     }
 
     @Test
@@ -196,7 +190,6 @@ class AlbumServiceTest {
         assertThat(result).hasSize(3);
         assertThat(result.get(0).getReleaseYear()).isEqualTo(2007);
         assertThat(result.get(1).getBand()).isEqualTo("Slipknot");
-
     }
 
     @Test
@@ -210,9 +203,8 @@ class AlbumServiceTest {
 
         //then
         assertThat(result).isEqualTo(testAlbum);
-        assertThat(result.get().getBand()).isEqualTo("Slipknot");
+        assertThat(result.get().getBand()).isEqualTo(testAlbum.get().getBand());
         assertThat(result.get().getId()).isEqualTo(1);
-
     }
 
     @Test
@@ -226,7 +218,6 @@ class AlbumServiceTest {
 
         // then
         assertThat(result).isEqualTo(null);
-
     }
 
     @Test
@@ -269,7 +260,6 @@ class AlbumServiceTest {
         //ten
         verify(albumRepositoryMock, times(1)).deleteById(1);
         assertThat(testAlbum).isEqualTo(null);
-
     }
 
     @Test
@@ -286,10 +276,7 @@ class AlbumServiceTest {
 
         //then
         verify(albumRepositoryMock,times(1)).save(oldAlbum);
-        assertThat(result.getBand()).isEqualTo("Moonspell");
+        assertThat(result.getBand()).isEqualTo(newAlbum.getBand());
     }
 
-    @Test
-    void updateWholeRecord_shouldNot_updateAlbumFields_when_oldAlbumIsNotFound() {
-    }
 }
