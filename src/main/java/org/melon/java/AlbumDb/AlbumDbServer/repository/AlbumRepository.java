@@ -20,10 +20,6 @@ public interface AlbumRepository extends CrudRepository<Album, Integer> {
 
     Optional<Album> findByTitleAndBand(String title,String band);
 
-//    @Transactional
-//    @Modifying
-//    @Query("update Album a set a.band = ?1 where a.id = ?2" )
-//    void updateBand( String band, int id);
 
 
 }

@@ -93,18 +93,6 @@ public class AlbumController {
         }
     }
 
-//    @PutMapping("/update_band/{id}")
-//    public ResponseEntity<AlbumDbResponse> updateBand(@RequestBody Album album, @PathVariable int id) {
-//        Optional<Album> albumFromDb = Optional.ofNullable(albumService.findById(id));
-//        if (albumFromDb.isPresent()) {
-//            albumService.updateBand(album.getBand(), id);
-//            return ResponseEntity.ok(AlbumDbResponse.of("Zaktualizowano nazwę zespołu w albumie o ID =:" + id));
-//        } else {
-//            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(AlbumDbResponse.of("Nie znaleziono albumu o podanym ID = " + id));
-//        }
-//
-//    }
-
 
 
 

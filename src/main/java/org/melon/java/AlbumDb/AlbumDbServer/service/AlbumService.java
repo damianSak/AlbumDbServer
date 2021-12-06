@@ -55,8 +55,7 @@ public class AlbumService {
     }
 
     public Optional<Album> findByTitleAndBand(String title, String band) {
-        Optional<Album> albumFromDb = albumRepository.findByTitleAndBand(title, band);
-        return albumFromDb;
+        return albumRepository.findByTitleAndBand(title, band);
     }
 
     public Album save(Album album) {
@@ -75,7 +74,6 @@ public class AlbumService {
 
     public Album updateWholeRecord(Album album, int id) {
 
-//        Album albumToUpdate = albumRepository.findById(id).orElseThrow();
         Album albumToUpdate = listFindById(id).get(0);
         albumToUpdate.setTitle(album.getTitle());
         albumToUpdate.setBand(album.getBand());
@@ -83,12 +81,4 @@ public class AlbumService {
         albumToUpdate.setReleaseYear(album.getReleaseYear());
         return save(albumToUpdate);
     }
-
-//    public void updateBand(String band, int id) {
-//        Album albumToUpdate = findById(id);
-//        albumToUpdate.setBand(band);
-//        save(albumToUpdate);
-//    }
-
-
 }
